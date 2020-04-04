@@ -1,4 +1,5 @@
 module.exports = {
+  Profanity: [/(profanity|obscenity)/, /propaganda films‎/, /nazi/],
   Weapons: [
     /semi-automatic/,
     /rilfes/,
@@ -6,8 +7,12 @@ module.exports = {
     /pistols/,
     /shotguns/,
     /granades/,
-    /weapons/,
-    /knives/
+    /knives/,
+    /weapons and ammunition/,
+    / weapons$/,
+    /chemical weapon/,
+    /explosives/,
+    /flamethrowers/
   ],
   Violence: [
     /suicide/,
@@ -17,9 +22,35 @@ module.exports = {
     /serial killers/,
     /murder in ./,
     /necrophiles/,
-    /cannibals/
+    /terrorist incidents/,
+    /cannibals/,
+    /bombing/,
+    /mass shootings/,
+    /stabbing attacks/,
+    /arson attacks/,
+    /lynching/,
+    /drone strikes/,
+    /assassinations/,
+    /hostage taking/
   ],
   Sexuality: [
+    /bdsm/,
+    /fetish/,
+    /incest/,
+    /breast/,
+    /nipple/,
+    /penis/,
+    /scrotum/,
+    /nude sculptures/,
+    /naturis[mt]/,
+    /genital/,
+    /masturbation/,
+    /ejaculation/,
+    /orgasm/,
+    /erotica/,
+    /strip clubs/,
+    /camming/,
+    /sex toys/,
     /pornographic/,
     /pornography/,
     /erotic/,
@@ -36,6 +67,8 @@ module.exports = {
     /rapists/,
     /prostitutes/,
     /prostitution/,
-    /sex workers/
+    /sex workers/,
+    /nudity/,
+    /erotic dancers/
   ]
 }

@@ -256,6 +256,7 @@ module.exports = {
   wwiibritishsoftveh: 'Weapons',
   wwiichineseheavyweapons: 'Weapons',
   wwiichineseinfantryweapons: 'Weapons',
+  modernusinfweaponsnav: 'Weapons',
   'wwii danish ships': 'Weapons',
   'wwii dutch ships': 'Weapons',
   'wwii finnish ships': 'Weapons',
@@ -344,6 +345,9 @@ module.exports = {
   wwiusinfweaponsnav: 'Weapons',
   'world war i aircraft of the central powers': 'Weapons',
   wwiusnavalweapons: 'Weapons',
+
+  'list of terrorist incidents': 'Violence',
+  massacres: 'Violence',
 
   //
   'drug use': 'Drug-use',

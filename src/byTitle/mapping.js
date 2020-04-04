@@ -3,5 +3,6 @@ module.exports = {
   pimp: 'Sexuality',
   'sexual act': 'Sexuality',
   'sexual slang': 'Sexuality',
-  'sex position': 'Sexuality'
+  'sex position': 'Sexuality',
+  pornography: 'Sexuality'
 }

@@ -54,7 +54,7 @@ let res = doc.sfw()
 //}
 ```
 
-The `reason` property may be one of **sexuality|drug-use|weapons|violence** or **null** for misc.
+The `reason` property may be one of **Sexuality|Drug-use|Weapons|Violence|Profanity**
 
 ### Notes:
 
