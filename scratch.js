@@ -1,8 +1,8 @@
 var wtf = require('wtf_wikipedia')
 wtf.extend(require('./src'))
 
-wtf.fetch('Amateurpornografie', 'nl').then((doc) => {
-  console.log(doc.nsfw())
+wtf.fetch('The Matrix', 'en').then((doc) => {
+  console.log(doc.nsfw().detail)
 })
 // let file = 'United-Kingdom'
 // let str = require('fs')

@@ -1,4 +1,4 @@
-/* wtf-plugin-nsfw 0.0.1  MIT */
+/* wtf-plugin-nsfw 0.1.0  MIT */
 var patterns = {
   Sexuality: [/\bsex\b/i],
   Weapons: [/semi-automatic/i],
@@ -186,8 +186,6 @@ var mapping = {
   'fcs subsystems': 'Weapons',
   'filipino weapons': 'Weapons',
   'history of the tank': 'Weapons',
-  'imfdb name': 'Weapons',
-  'imfdb title': 'Weapons',
   'indonesian weapons': 'Weapons',
   'japanese (samurai) weapons, armour and equipment': 'Weapons',
   'japanese swords': 'Weapons',
@@ -368,6 +366,7 @@ var byPattern = function byPattern(str, patterns) {
       var reg = patterns[key][o];
 
       if (reg.test(str) === true) {
+        console.log(reg, str);
         return key;
       }
     }
@@ -409,10 +408,10 @@ var byTemplate = function byTemplate(doc) {
 var byTemplate_1 = byTemplate;
 
 var patterns$1 = {
-  Profanity: [/(profanity|obscenity)/, /propaganda films‎/, /nazi/],
+  Profanity: [/(profanity|obscenity)/, /propaganda films‎/],
   Weapons: [/semi-automatic/, /rilfes/, /firearms/, /pistols/, /shotguns/, /granades/, /knives/, /weapons and ammunition/, / weapons$/, /chemical weapon/, /explosives/, /flamethrowers/],
-  Violence: [/suicide/, /bombing/, /bombers/, /tactics/, /serial killers/, /murder in ./, /necrophiles/, /terrorist incidents/, /cannibals/, /bombing/, /mass shootings/, /stabbing attacks/, /arson attacks/, /lynching/, /drone strikes/, /assassinations/, /hostage taking/],
-  Sexuality: [/bdsm/, /fetish/, /incest/, /breast/, /nipple/, /penis/, /scrotum/, /nude sculptures/, /naturis[mt]/, /genital/, /masturbation/, /ejaculation/, /orgasm/, /erotica/, /strip clubs/, /camming/, /sex toys/, /pornographic/, /pornography/, /erotic/, /bdsm/, /human reproduction/, /sex/, /sexuality/, /rape/, /sexual abuse/, /dominatrices/, /brothels/, /red-light districts/, /courtesans/, /rapists/, /prostitutes/, /prostitution/, /sex workers/, /nudity/, /erotic dancers/]
+  Violence: [/suicide methods/, /\bbombing/, /\bbombers/, /. tactics/, /serial killers/, /murder in ./, /necrophiles/, /terrorist incidents/, /cannibals/, /\bbombing/, /mass shootings/, /stabbing attacks/, /arson attacks/, /lynching/, /drone strikes/, /assassinations/, /hostage taking/],
+  Sexuality: [/bdsm/, /fetish/, /incest/, /breast/, /nipple/, /penis/, /scrotum/, /nude sculptures/, /naturis[mt]/, /genital/, /masturbation/, /ejaculation/, /orgasm/, /erotica/, /strip clubs/, /camming/, /\bsex toys/, /pornographic/, /pornography/, /erotic/, /bdsm/, /human reproduction/, /\bsexuality\b/, /\brape in ./, /sexual abuse/, /dominatrices/, /brothels/, /red-light districts/, /courtesans/, /\brapists\b/, /prostitutes/, /prostitution/, /sex workers/, /nudity/, /erotic dancers/]
 };
 
 var mapping$1 = {
@@ -627,6 +626,25 @@ var mapping$1 = {
   'psychoactive drug stubs': 'Drug-use'
 };
 
+var okay = {
+  'sexual revolution': true,
+  'explosives engineers': true,
+  'bisexual writers': true,
+  'bisexual people': true,
+  'bisexual men': true,
+  'bisexual women': true,
+  'mythological rapists': true,
+  'obscenity controversies in literature': true,
+  'obscenity controversies in television': true,
+  'obscenity controversies in music': true,
+  'breast cancer survivors': true,
+  'deaths from breast cancer': true,
+  'people prosecuted under anti-homosexuality laws': true,
+  'philosophers of sexuality': true,
+  'anti-pornography activists': true,
+  'songs about nuclear war and weapons': true
+};
+
 var byCategory = function byCategory(doc) {
   var found = [];
   var cats = doc.categories(); // clean them up a bit
@@ -639,7 +657,12 @@ var byCategory = function byCategory(doc) {
   }); // loop through each
 
   for (var i = 0; i < cats.length; i++) {
-    var cat = cats[i]; // try our 1-to-1 mapping
+    var cat = cats[i]; // these false-flags are fine
+
+    if (okay.hasOwnProperty(cat)) {
+      continue;
+    } // try our 1-to-1 mapping
+
 
     if (mapping$1.hasOwnProperty(cat)) {
       found.push({
@@ -761,10 +784,10 @@ var plugin = function plugin(models) {
       if (detail[keys[i]].length > 0) {
         var reason = detail[keys[i]].find(function (o) {
           return o.reason;
-        });
+        }) || {};
         return {
           safe_for_work: false,
-          reason: reason,
+          reason: reason.reason,
           detail: detail
         };
       }

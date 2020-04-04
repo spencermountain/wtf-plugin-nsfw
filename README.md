@@ -57,6 +57,8 @@ let res = doc.sfw()
 
 The `reason` property may be one of **Sexuality|Drug-use|Weapons|Violence|Profanity**
 
+As of `v0.1`, this library flags **~2%** of english wikipedia articles.
+
 ### Notes:
 
 In general, sexual content is flagged in a general way - without any judgement or consideration of morality or taste.

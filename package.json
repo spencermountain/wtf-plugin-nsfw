@@ -1,7 +1,7 @@
 {
   "name": "wtf-plugin-nsfw",
   "description": "content filter for wikipedia articles",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "./builds/wtf-plugin-nsfw.js",
   "unpkg": "./builds/wtf-plugin-nsfw.min.js",
   "module": "./builds/wtf-plugin-nsfw.mjs",

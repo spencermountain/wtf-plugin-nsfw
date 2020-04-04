@@ -181,8 +181,6 @@ module.exports = {
   'fcs subsystems': 'Weapons',
   'filipino weapons': 'Weapons',
   'history of the tank': 'Weapons',
-  'imfdb name': 'Weapons',
-  'imfdb title': 'Weapons',
   'indonesian weapons': 'Weapons',
   'japanese (samurai) weapons, armour and equipment': 'Weapons',
   'japanese swords': 'Weapons',

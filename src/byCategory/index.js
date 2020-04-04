@@ -1,12 +1,13 @@
 const patterns = require('./patterns')
 const mapping = require('./mapping')
+const okay = require('./okay')
 const byPattern = require('../_byPattern')
 
-const byCategory = function(doc) {
+const byCategory = function (doc) {
   let found = []
   let cats = doc.categories()
   // clean them up a bit
-  cats = cats.map(cat => {
+  cats = cats.map((cat) => {
     cat = cat.toLowerCase()
     cat = cat.replace(/^(category|categorie|kategori): ?/i, '')
     cat = cat.replace(/_/g, ' ')
@@ -15,6 +16,10 @@ const byCategory = function(doc) {
   // loop through each
   for (let i = 0; i < cats.length; i++) {
     const cat = cats[i]
+    // these false-flags are fine
+    if (okay.hasOwnProperty(cat)) {
+      continue
+    }
     // try our 1-to-1 mapping
     if (mapping.hasOwnProperty(cat)) {
       found.push({ reason: mapping[cat], cat: cat })

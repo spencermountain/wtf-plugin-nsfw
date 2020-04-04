@@ -21,10 +21,10 @@ const plugin = function (models) {
     let keys = Object.keys(detail)
     for (let i = 0; i < keys.length; i++) {
       if (detail[keys[i]].length > 0) {
-        let reason = detail[keys[i]].find((o) => o.reason)
+        let reason = detail[keys[i]].find((o) => o.reason) || {}
         return {
           safe_for_work: false,
-          reason: reason,
+          reason: reason.reason,
           detail: detail
         }
       }
