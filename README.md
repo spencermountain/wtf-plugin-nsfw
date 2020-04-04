@@ -23,7 +23,7 @@ This plugin is a (work in progress) attempt to filter objectionable, or adult co
 
 Wikipedia has [frequently rejected](https://en.wikipedia.org/wiki/Wikipedia:Rating_system) any explicit rating system, or content flagging, due to fears that it will be misused, or generate dispute.
 
-As a result, there is a large amount of graphic imagery, pornography, detailed violence, drug use, and other nsfw content, with no clear-cut way to identify.
+As a result, there is a large amount of graphic imagery, pornography, detailed violence, drug use, and other nsfw content, without any clear-cut way to identify it. [1](https://en.wikipedia.org/wiki/Wikipedia_talk:No_disclaimers_in_articles)
 
 This library tries to flag an article as `nsfw`, according to some structured information, and some opinionated (but sensible) rules.
 
@@ -32,6 +32,7 @@ It looks in a number of different places:
 - categories (like **'[[Category:Machine Guns]]'**)
 - templates (like **{{Sex positions}}**)
 - page titles (like **star wars (Adult Film)**)
+- pages with images from Wikipedia's [bad image list](https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list)
 
 ```js
 const wtf = require('wtf_wikipedia')
@@ -63,21 +64,23 @@ This could include content that most find harmless, like books with LGBT charact
 
 Explicit recreational drug information is flagged, along with some (often helpful) medical information.
 
-Weapon content of all kinds is attempted to be flagged. This includes historical, and sometimes fictional weaponry.
+Weapon content of all kinds is attempted to be flagged. This includes historical, and fictional weaponry.
 
 Wars and military conflicts are kept, but an attempt is made to limit pages with grotesque violent acts. (particularly difficult)
 
-This library is very limited right now.
+This library is very limited right now, and is certainly not appropriate for any commercial or wide-spread usage.
 
 You're free to use the information provided by this library however you wish. You may choose to establish your own rules.
+
+This library is built for the english wikipedia, and other languages are not supported.
 
 ### Disclaimer
 
 This script is not intended to be used as a sufficient content-filter for any content, in wikipedia or elsewhere.
-Additional care needs to be taken, in addition to this script, to ensure content meets any guidelines, or that it is safe for a general audiance.
+Additional care needs to be taken, in addition to this script, to ensure content meets any content guidelines, or that it is safe for a general audiance.
 
 The authors and contributors take no responsibility for the performance or accuracy of this script.
 
-work-in-progress.
+work-in-progress!
 
 MIT

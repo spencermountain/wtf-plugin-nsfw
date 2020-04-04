@@ -1,8 +1,8 @@
 var wtf = require('wtf_wikipedia')
 wtf.extend(require('./src'))
 
-wtf.fetch('Jeffrey Dahmer').then(doc => {
-  console.log(doc.sfw())
+wtf.fetch('Amateurpornografie', 'nl').then((doc) => {
+  console.log(doc.nsfw())
 })
 // let file = 'United-Kingdom'
 // let str = require('fs')
