@@ -35,16 +35,9 @@ It looks in a number of different places:
 - pages with images from Wikipedia's [bad image list](https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list)
 
 ```js
-const wtf = require('wtf_wikipedia')
-wtf.extend(require('wtf-plugin-sfw'))
-
-let doc = await wtf.fetch('One-night stand')
-let res = doc.nsfw()
-//{
-//  safe_for_work: false,
-//  reason: 'Sexuality',
-//  detail: {template: [{name:'human sexuality']}
-//}
+import wtf from 'wtf_wikipedia'
+import nsfwPlugin from 'wtf-plugin-nsfw'
+wtf.extend(nsfwPlugin)
 
 let doc = await wtf.fetch('Toronto Raptors')
 let res = doc.sfw()
@@ -52,6 +45,14 @@ let res = doc.sfw()
 //  safe_for_work: true,
 //  reason:null
 //  detail: {}
+//}
+
+let doc = await wtf.fetch('One-night stand')
+let res = doc.nsfw()
+//{
+//  safe_for_work: false,
+//  reason: 'Sexuality',
+//  detail: {template: [{name:'human sexuality']}
 //}
 ```
 

@@ -5,7 +5,6 @@ const byPattern = function (str, patterns) {
     for (let o = 0; o < patterns[key].length; o++) {
       const reg = patterns[key][o]
       if (reg.test(str) === true) {
-        console.log(reg, str)
         return key
       }
     }
