@@ -77,10 +77,18 @@ const nsfwPlugin = require('wtf-plugin-nsfw')
 wtf.extend(nsfwPlugin)
 ```
 
-### TypeScript
+natively on the web:
+```html
+<script src="https://unpkg.com/wtf_wikipedia"></script>
+<script src="https://unpkg.com/wtf-plugin-nsfw"></script>
+<script>
+  const wtf = window.wtf
+  const nsfwPlugin = window.wtfNsfw
+  wtf.extend(nsfwPlugin)
+</script>
+```
 
-Type declarations are included. wtf_wikipedia doesn't export its `Document` class by name yet, so cast to `NsfwDocument` to get `.nsfw()` typed:
-
+In TypeScript:
 ```ts
 import wtf from 'wtf_wikipedia'
 import nsfwPlugin, { NsfwDocument, NsfwReason } from 'wtf-plugin-nsfw'
@@ -92,16 +100,8 @@ if (!res.safe_for_work) {
   const why: NsfwReason = res.reason
 }
 ```
-or alternatively,
-```html
-<script src="https://unpkg.com/wtf_wikipedia"></script>
-<script src="https://unpkg.com/wtf-plugin-nsfw"></script>
-<script>
-  const wtf = window.wtf
-  const nsfwPlugin = window.wtfNsfw
-  wtf.extend(nsfwPlugin)
-</script>
-```
+
+
 
 ### Notes:
 

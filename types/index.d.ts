@@ -44,21 +44,17 @@ export interface NsfwMethods {
 
 /**
  * a wtf_wikipedia Document with `.nsfw()` attached.
- * wtf_wikipedia does not currently export its Document class by name, so the
- * module augmentation below cannot merge with it - cast to this type instead:
+ * before wtf_wikipedia 10.5, Document was not exported by name, so the module
+ * augmentation below could not merge with it - cast to this type instead:
  *   const doc = wtf(text) as NsfwDocument
  */
 export type NsfwDocument = wtf.Document & NsfwMethods
 
-// takes effect automatically once wtf_wikipedia exports `Document` from its types
+// merges into Document on wtf_wikipedia 10.5+, which exports the class type. a no-op before that.
 declare module 'wtf_wikipedia' {
   interface Document extends NsfwMethods {}
 }
 
 /** pass this to `wtf.extend()` to add `doc.nsfw()` */
-declare const nsfwPlugin: (
-  models: { Doc: { prototype: object } },
-  templates?: object,
-  lib?: typeof wtf
-) => void
+declare const nsfwPlugin: (models: { Doc: { prototype: object } }) => void
 export default nsfwPlugin

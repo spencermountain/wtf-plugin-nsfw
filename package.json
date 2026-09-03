@@ -9,10 +9,18 @@
   "types": "./types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./types/index.d.ts",
-      "import": "./builds/wtf-plugin-nsfw.mjs",
-      "require": "./builds/wtf-plugin-nsfw.cjs",
-      "default": "./builds/wtf-plugin-nsfw.mjs"
+      "import": {
+        "types": "./types/index.d.ts",
+        "default": "./builds/wtf-plugin-nsfw.mjs"
+      },
+      "require": {
+        "types": "./types/index.d.cts",
+        "default": "./builds/wtf-plugin-nsfw.cjs"
+      },
+      "default": {
+        "types": "./types/index.d.ts",
+        "default": "./builds/wtf-plugin-nsfw.mjs"
+      }
     }
   },
   "sideEffects": false,

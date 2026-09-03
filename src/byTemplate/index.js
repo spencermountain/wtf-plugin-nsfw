@@ -6,7 +6,9 @@ const byTemplate = function (doc) {
   const templates = doc.templates()
   const found = []
   for (let i = 0; i < templates.length; i++) {
-    const title = templates[i].template
+    const tmpl = templates[i]
+    // wtf_wikipedia v10 returns Template objects; v8 returned plain json
+    const title = typeof tmpl.json === 'function' ? tmpl.json().template : tmpl.template
     if (mapping.hasOwnProperty(title)) {
       found.push({ reason: mapping[title], name: title })
     } else {
