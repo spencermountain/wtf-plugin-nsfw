@@ -4,12 +4,12 @@ import byPattern from '../_byPattern.js'
 const paren = /\((.*)\)$/
 
 const byTitle = function (doc) {
-  let title = doc.title()
+  const title = doc.title()
   if (!title) {
     return []
   }
   //look at parentheses like 'Tornado (film)'
-  let m = title.match(paren)
+  const m = title.match(paren)
   if (!m) {
     return []
   }
@@ -24,7 +24,7 @@ const byTitle = function (doc) {
   }
 
   // look at regex
-  let match = byPattern(title, patterns)
+  const match = byPattern(title, patterns)
   if (match) {
     return [{ reason: match, title: title }]
   }

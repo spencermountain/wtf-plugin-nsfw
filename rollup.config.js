@@ -4,7 +4,7 @@ import fs from 'fs'
 
 const pkg = JSON.parse(fs.readFileSync('./package.json').toString())
 const version = pkg.version
-console.log('\n 📦  - running rollup..\n')
+console.log('\n 📦  - running rollup..\n')  
 
 const banner = '/* spencermountain/wtf-plugin-nsfw ' + version + ' MIT */'
 

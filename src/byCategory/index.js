@@ -4,7 +4,7 @@ import okay from './okay.js'
 import byPattern from '../_byPattern.js'
 
 const byCategory = function (doc) {
-  let found = []
+  const found = []
   let cats = doc.categories()
   // clean them up a bit
   cats = cats.map((cat) => {
@@ -26,7 +26,7 @@ const byCategory = function (doc) {
       continue
     }
     // loop through our patterns
-    let match = byPattern(cat, patterns)
+    const match = byPattern(cat, patterns)
     if (match) {
       found.push({ reason: match, cat: cat })
     }

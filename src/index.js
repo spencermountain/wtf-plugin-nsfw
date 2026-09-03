@@ -6,8 +6,8 @@ import byImage from './byImage/index.js'
 const plugin = function (models) {
   // add a new method to main class
   models.Doc.prototype.nsfw = function (options) {
-    let doc = this
-    let detail = {}
+    const doc = this
+    const detail = {}
 
     //look for 'john doe (pimp)', etc
     detail.title = byTitle(doc, options)
@@ -18,10 +18,10 @@ const plugin = function (models) {
     //look for 'Category: Porn websites', etc
     detail.category = byCategory(doc, options)
 
-    let keys = Object.keys(detail)
+    const keys = Object.keys(detail)
     for (let i = 0; i < keys.length; i++) {
       if (detail[keys[i]].length > 0) {
-        let reason = detail[keys[i]].find((o) => o.reason) || {}
+        const reason = detail[keys[i]].find((o) => o.reason) || {}
         return {
           safe_for_work: false,
           reason: reason.reason,

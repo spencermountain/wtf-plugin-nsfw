@@ -4,7 +4,7 @@ import fs from 'fs'
 const url = 'https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list'
 
 wtf.fetch(url).then((doc) => {
-  let images = []
+  const images = []
   doc
     .lists()[0]
     .json()
@@ -16,7 +16,7 @@ wtf.fetch(url).then((doc) => {
         images.push(file)
       }
     })
-  let out =
+  const out =
     `// bad images from ${url}
   export default ` + JSON.stringify(images, null, 2)
   fs.writeFileSync('bad-image-list.js', out)

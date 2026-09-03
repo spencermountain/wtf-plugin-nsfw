@@ -1688,7 +1688,7 @@
     let found = [];
     for (let i = 0; i < images.length; i++) {
       let file = images[i].file();
-      file = file.toLowerCase().replace(/.*:/i, '').trim();
+      file = file.toLowerCase().replace(/.*:/, '').trim();
       if (mapping.hasOwnProperty(file)) {
         found.push({ reason: mapping[file], name: file });
       }
