@@ -34,7 +34,6 @@ It looks in a number of different places:
 - page titles (like **star wars (Adult Film)**)
 - pages with images from Wikipedia's [bad image list](https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list)
 
-
 ### Usage
 ```js
 import wtf from 'wtf_wikipedia'
@@ -103,6 +102,8 @@ This library is very limited right now, and is certainly not appropriate for any
 You're free to use the information provided by this library however you wish. You may choose to establish your own rules.
 
 This library is built for the english wikipedia, and other languages are not supported.
+
+Even just reading the source code can be a bad time.
 
 ### Disclaimer
 

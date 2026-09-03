@@ -1,7 +1,7 @@
 {
   "name": "wtf-plugin-nsfw",
   "description": "content filter for wikipedia articles",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "main": "./builds/wtf-plugin-nsfw.cjs",
   "module": "./builds/wtf-plugin-nsfw.mjs",
@@ -37,7 +37,7 @@
     "printWidth": 100
   },
   "peerDependencies": {
-    "wtf_wikipedia": "^8.0.0"
+    "wtf_wikipedia": "^10.0.0"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.3",
@@ -45,8 +45,7 @@
     "eslint-plugin-regexp": "3.1.0",
     "rollup": "4.62.2",
     "tap-dancer": "^0.2.0",
-    "tape": "^5.10.2",
-    "wtf_wikipedia": "^8.1.1"
+    "tape": "^5.10.2"
   },
   "license": "MIT"
 }

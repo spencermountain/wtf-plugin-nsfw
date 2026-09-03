@@ -1,4 +1,4 @@
-import mapping from './mapping.js'
+import mapping from './bad-image-list.js'
 // look for any known obscene images from wikipedia's
 // https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list
 const byImage = function (doc) {
