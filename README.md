@@ -19,7 +19,7 @@
   <code>npm install wtf-plugin-nsfw</code>
 </div>
 
-This plugin is a (work in progress) attempt to filter objectionable, or adult content, in various forms, in wikipedia.
+This is a plugin for [wtf_wikipedia](https://github.com/spencermountain/wtf_wikipedia/) representing a courageous attempt to filter objectionable or adult content in wikipedia.
 
 Wikipedia has [frequently rejected](https://en.wikipedia.org/wiki/Wikipedia:Rating_system) any explicit rating system, or content flagging, due to fears that it will be misused, or generate dispute.
 
@@ -33,6 +33,8 @@ It looks in a number of different places:
 - templates (like **{{Sex positions}}**)
 - page titles (like **star wars (Adult Film)**)
 - pages with images from Wikipedia's [bad image list](https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list)
+
+As of `v1.0`, this library flags **~2%** of english wikipedia articles.
 
 ### Usage
 ```js
@@ -62,10 +64,9 @@ doc.nsfw()
 // }
 ```
 
-The `reason` property may be one of **Sexuality|Drug-use|Weapons|Violence|Profanity**
+The `reason` property may be one of **Sexuality | Drug-use | Weapons | Violence | Profanity**
 
-As of `v0.1`, this library flags **~2%** of english wikipedia articles.
-
+---
 
 ### Install
 The package ships as an ES module, with a CommonJS build for `require()`:
@@ -74,6 +75,22 @@ The package ships as an ES module, with a CommonJS build for `require()`:
 const wtf = require('wtf_wikipedia')
 const nsfwPlugin = require('wtf-plugin-nsfw')
 wtf.extend(nsfwPlugin)
+```
+
+### TypeScript
+
+Type declarations are included. wtf_wikipedia doesn't export its `Document` class by name yet, so cast to `NsfwDocument` to get `.nsfw()` typed:
+
+```ts
+import wtf from 'wtf_wikipedia'
+import nsfwPlugin, { NsfwDocument, NsfwReason } from 'wtf-plugin-nsfw'
+wtf.extend(nsfwPlugin)
+
+const doc = wtf(text) as NsfwDocument
+const res = doc.nsfw()
+if (!res.safe_for_work) {
+  const why: NsfwReason = res.reason
+}
 ```
 or alternatively,
 ```html
