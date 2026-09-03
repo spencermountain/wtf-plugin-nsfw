@@ -1,8 +1,8 @@
-const patterns = require('./patterns')
-const mapping = require('./mapping')
-const byPattern = require('../_byPattern')
+import patterns from './patterns.js'
+import mapping from './mapping.js'
+import byPattern from '../_byPattern.js'
 
-const byTemplate = function(doc) {
+const byTemplate = function (doc) {
   let templates = doc.templates()
   let found = []
   for (let i = 0; i < templates.length; i++) {
@@ -20,4 +20,4 @@ const byTemplate = function(doc) {
   return found
 }
 
-module.exports = byTemplate
+export default byTemplate

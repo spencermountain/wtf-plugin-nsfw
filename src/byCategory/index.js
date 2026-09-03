@@ -1,7 +1,7 @@
-const patterns = require('./patterns')
-const mapping = require('./mapping')
-const okay = require('./okay')
-const byPattern = require('../_byPattern')
+import patterns from './patterns.js'
+import mapping from './mapping.js'
+import okay from './okay.js'
+import byPattern from '../_byPattern.js'
 
 const byCategory = function (doc) {
   let found = []
@@ -33,4 +33,4 @@ const byCategory = function (doc) {
   }
   return found
 }
-module.exports = byCategory
+export default byCategory

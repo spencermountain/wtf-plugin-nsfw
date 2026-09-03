@@ -1,5 +1,5 @@
 // bad images from https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list
-module.exports = [
+export default [
   '00 Ball torture.jpg',
   '001-full-erect.jpg',
   '001-full-erect (cropped).jpg',

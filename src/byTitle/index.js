@@ -1,9 +1,9 @@
-const mapping = require('./patterns')
-const patterns = require('./patterns')
-const byPattern = require('../_byPattern')
+import mapping from './mapping.js'
+import patterns from './patterns.js'
+import byPattern from '../_byPattern.js'
 const paren = /\((.*)\)$/
 
-const byTitle = function(doc) {
+const byTitle = function (doc) {
   let title = doc.title()
   if (!title) {
     return []
@@ -30,4 +30,4 @@ const byTitle = function(doc) {
   }
   return []
 }
-module.exports = byTitle
+export default byTitle

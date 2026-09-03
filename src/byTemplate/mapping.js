@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   // https://en.wikipedia.org/wiki/Category:Sex_and_sexuality_templates
   // (March 2020)
   'animal sexual behavior': 'Sexuality',

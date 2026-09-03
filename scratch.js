@@ -1,13 +1,12 @@
-var wtf = require('wtf_wikipedia')
-wtf.extend(require('./src'))
+import wtf from 'wtf_wikipedia'
+import plugin from './src/index.js'
+wtf.extend(plugin)
 
 wtf.fetch('The Matrix', 'en').then((doc) => {
   console.log(doc.nsfw().detail)
 })
+// import fs from 'fs'
 // let file = 'United-Kingdom'
-// let str = require('fs')
-//   .readFileSync(`./tests/cache/${file}.txt`)
-//   .toString()
-
+// let str = fs.readFileSync(`./tests/cache/${file}.txt`).toString()
 // let doc = wtf(str)
-// console.log(JSON.stringify(doc.sfw(), null, 2))
+// console.log(JSON.stringify(doc.nsfw(), null, 2))

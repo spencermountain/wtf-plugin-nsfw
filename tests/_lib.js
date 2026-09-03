@@ -1,13 +1,12 @@
-if (typeof process !== undefined && typeof module !== undefined) {
-  let wtf
-  if (process.env.TESTENV === 'prod') {
-    console.log('🧢  -  testing production')
-    wtf = require('wtf_wikipedia')
-    wtf.extend(require(`../`))
-  } else {
-    wtf = require('wtf_wikipedia')
-    wtf.extend(require(`../src`))
-  }
+import wtf from 'wtf_wikipedia'
 
-  module.exports = wtf
+let plugin
+if (process.env.TESTENV === 'prod') {
+  console.log('🧢  -  testing production')
+  plugin = (await import('../builds/wtf-plugin-nsfw.mjs')).default
+} else {
+  plugin = (await import('../src/index.js')).default
 }
+wtf.extend(plugin)
+
+export default wtf

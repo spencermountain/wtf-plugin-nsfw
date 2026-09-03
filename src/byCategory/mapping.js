@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   'bdsm in films': 'Sexuality',
   sexuality: 'Sexuality',
   'sexual slang': 'Profanity',

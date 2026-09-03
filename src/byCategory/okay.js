@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   'sexual revolution': true,
   'explosives engineers': true,
   'bisexual writers': true,

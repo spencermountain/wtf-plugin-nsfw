@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   sexuality: 'Sexuality',
   pimp: 'Sexuality',
   'sexual act': 'Sexuality',

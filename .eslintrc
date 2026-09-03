@@ -3,7 +3,7 @@
     "es6": true
   },
   "parserOptions": {
-    "ecmaVersion": 2017,
+    "ecmaVersion": 2022,
     "sourceType": "module",
     "ecmaFeatures": {}
   },
@@ -36,16 +36,11 @@
   },
   "globals": {
     "process": true,
-    "require": true,
     "console": true,
-    "module": true,
-    "exports": true,
     "setInterval": true,
     "setTimeout": true,
     "global": true,
     "clearInterval": true,
-    "clearTimeout": true,
-    "__dirname": true,
-    "__pathname": true
+    "clearTimeout": true
   }
 }

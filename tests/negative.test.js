@@ -1,7 +1,8 @@
-const test = require('tape')
-const wtf = require('./_lib')
-const fs = require('fs')
-const path = require('path')
+import test from 'tape'
+import fs from 'fs'
+import wtf from './_lib.js'
+
+const read = (name) => fs.readFileSync(new URL(`./cache/${name}.txt`, import.meta.url), 'utf8')
 
 test('negative test', function (t) {
   let arr = [
@@ -20,9 +21,7 @@ test('negative test', function (t) {
     'anarchism'
   ]
   arr.forEach((str) => {
-    let abs = path.join(__dirname, `./cache/${str}.txt`)
-    let txt = fs.readFileSync(abs).toString()
-    let doc = wtf(txt)
+    let doc = wtf(read(str))
     t.equal(doc.nsfw().safe_for_work, true, str)
   })
   t.end()

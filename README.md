@@ -9,8 +9,8 @@
   </a>
   
   <!-- file size -->
-  <a href="https://unpkg.com/wtf-plugin-nsfw/builds/wtf-plugin-sfw.min.js">
-    <img src="https://badge-size.herokuapp.com/spencermountain/wtf-plugin-html/master/builds/wtf-plugin-nsfw.min.js" />
+  <a href="https://unpkg.com/wtf-plugin-nsfw/builds/wtf-plugin-nsfw.min.js">
+    <img src="https://img.shields.io/bundlephobia/min/wtf-plugin-nsfw?style=flat-square" />
   </a>
    <hr/>
 </div>
@@ -34,31 +34,58 @@ It looks in a number of different places:
 - page titles (like **star wars (Adult Film)**)
 - pages with images from Wikipedia's [bad image list](https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list)
 
+
+### Usage
 ```js
 import wtf from 'wtf_wikipedia'
 import nsfwPlugin from 'wtf-plugin-nsfw'
 wtf.extend(nsfwPlugin)
 
 let doc = await wtf.fetch('Toronto Raptors')
-let res = doc.sfw()
-//{
-//  safe_for_work: true,
-//  reason:null
-//  detail: {}
-//}
+doc.nsfw()
+// {
+//   safe_for_work: true,
+//   reason: null,
+//   detail: { title: [], image: [], template: [], category: [] }
+// }
 
-let doc = await wtf.fetch('One-night stand')
-let res = doc.nsfw()
-//{
-//  safe_for_work: false,
-//  reason: 'Sexuality',
-//  detail: {template: [{name:'human sexuality']}
-//}
+doc = await wtf.fetch('One-night stand')
+doc.nsfw()
+// {
+//   safe_for_work: false,
+//   reason: 'Sexuality',
+//   detail: {
+//     title: [],
+//     image: [],
+//     template: [{ reason: 'Sexuality', name: 'human sexuality' }],
+//     category: [{ reason: 'Sexuality', cat: 'casual sex' }]
+//   }
+// }
 ```
 
 The `reason` property may be one of **Sexuality|Drug-use|Weapons|Violence|Profanity**
 
 As of `v0.1`, this library flags **~2%** of english wikipedia articles.
+
+
+### Install
+The package ships as an ES module, with a CommonJS build for `require()`:
+
+```js
+const wtf = require('wtf_wikipedia')
+const nsfwPlugin = require('wtf-plugin-nsfw')
+wtf.extend(nsfwPlugin)
+```
+or alternatively,
+```html
+<script src="https://unpkg.com/wtf_wikipedia"></script>
+<script src="https://unpkg.com/wtf-plugin-nsfw"></script>
+<script>
+  const wtf = window.wtf
+  const nsfwPlugin = window.wtfNsfw
+  wtf.extend(nsfwPlugin)
+</script>
+```
 
 ### Notes:
 

@@ -1,7 +1,7 @@
-const byTemplate = require('./byTemplate')
-const byCategory = require('./byCategory')
-const byTitle = require('./byTitle')
-const byImage = require('./byImage')
+import byTemplate from './byTemplate/index.js'
+import byCategory from './byCategory/index.js'
+import byTitle from './byTitle/index.js'
+import byImage from './byImage/index.js'
 
 const plugin = function (models) {
   // add a new method to main class
@@ -12,7 +12,7 @@ const plugin = function (models) {
     //look for 'john doe (pimp)', etc
     detail.title = byTitle(doc, options)
     // look for known obscene images
-    detail.title = byImage(doc, options)
+    detail.image = byImage(doc, options)
     //look for '{{terrorism}}'
     detail.template = byTemplate(doc, options)
     //look for 'Category: Porn websites', etc
@@ -37,4 +37,4 @@ const plugin = function (models) {
     }
   }
 }
-module.exports = plugin
+export default plugin

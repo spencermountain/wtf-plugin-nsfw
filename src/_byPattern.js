@@ -11,4 +11,4 @@ const byPattern = function (str, patterns) {
   }
   return null
 }
-module.exports = byPattern
+export default byPattern

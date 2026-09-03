@@ -2,15 +2,28 @@
   "name": "wtf-plugin-nsfw",
   "description": "content filter for wikipedia articles",
   "version": "0.1.0",
-  "main": "./builds/wtf-plugin-nsfw.js",
-  "unpkg": "./builds/wtf-plugin-nsfw.min.js",
+  "type": "module",
+  "main": "./builds/wtf-plugin-nsfw.cjs",
   "module": "./builds/wtf-plugin-nsfw.mjs",
+  "unpkg": "./builds/wtf-plugin-nsfw.min.js",
+  "exports": {
+    ".": {
+      "import": "./builds/wtf-plugin-nsfw.mjs",
+      "require": "./builds/wtf-plugin-nsfw.cjs",
+      "default": "./builds/wtf-plugin-nsfw.mjs"
+    }
+  },
+  "sideEffects": false,
   "author": "Spencer Kelly (spencermountain)",
-  "homepage": "https://github.com/spencermountain/wtf_wikipedia/plugins/nsfw#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spencermountain/wtf-plugin-nsfw.git"
+  },
+  "homepage": "https://github.com/spencermountain/wtf-plugin-nsfw#readme",
   "scripts": {
     "watch": "amble ./scratch.js",
-    "test": "tape ./tests/**/*.test.js | tap-dancer",
-    "testb": "TESTENV=prod tape ./tests/**/*.test.js | tap-dancer",
+    "test": "tape \"./tests/**/*.test.js\" | tap-dancer",
+    "testb": "TESTENV=prod tape \"./tests/**/*.test.js\" | tap-dancer",
     "build": "rollup -c"
   },
   "files": [
@@ -23,20 +36,17 @@
     "singleQuote": true,
     "printWidth": 100
   },
-  "dependencies": {},
   "peerDependencies": {
     "wtf_wikipedia": "^8.0.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^29.0.2",
-    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "eslint-plugin-regexp": "3.1.0",
     "rollup": "4.62.2",
     "tap-dancer": "^0.2.0",
-    "tape": "^4.11.0",
+    "tape": "^5.10.2",
     "wtf_wikipedia": "^8.1.1"
   },
-  "licence": "MIT"
+  "license": "MIT"
 }

@@ -1,12 +1,12 @@
-module.exports = {
-  Profanity: [/(profanity|obscenity)/, /propaganda films‎/],
+export default {
+  Profanity: [/(profanity|obscenity)/, /propaganda films/],
   Weapons: [
     /semi-automatic/,
-    /rilfes/,
+    /rifles/,
     /firearms/,
     /pistols/,
     /shotguns/,
-    /granades/,
+    /grenades/,
     /knives/,
     /weapons and ammunition/,
     / weapons$/,
@@ -24,7 +24,6 @@ module.exports = {
     /necrophiles/,
     /terrorist incidents/,
     /cannibals/,
-    /\bbombing/,
     /mass shootings/,
     /stabbing attacks/,
     /arson attacks/,
@@ -54,7 +53,6 @@ module.exports = {
     /pornographic/,
     /pornography/,
     /erotic/,
-    /bdsm/,
     /human reproduction/,
     /\bsexuality\b/,
     /\brape in ./,

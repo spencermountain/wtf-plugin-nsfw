@@ -1,4 +1,4 @@
-const mapping = require('./mapping')
+import mapping from './mapping.js'
 // look for any known obscene images from wikipedia's
 // https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list
 const byImage = function (doc) {
@@ -14,4 +14,4 @@ const byImage = function (doc) {
   return found
 }
 
-module.exports = byImage
+export default byImage
