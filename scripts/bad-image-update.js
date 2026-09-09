@@ -1,7 +1,9 @@
 import wtf from 'wtf_wikipedia'
 import fs from 'fs'
+import hash, { normalize } from '../src/byImage/hash.js'
 
 const url = 'https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list'
+const output = new URL('../src/byImage/mapping.js', import.meta.url)
 
 wtf.fetch(url).then((doc) => {
   const images = []
@@ -16,8 +18,9 @@ wtf.fetch(url).then((doc) => {
         images.push(file)
       }
     })
-  const out =
-    `// bad images from ${url}
-  export default ` + JSON.stringify(images, null, 2)
-  fs.writeFileSync('bad-image-list.js', out)
+  const hashes = [...new Set(images.map((file) => hash(normalize(file))))]
+  const out = `// 32-bit hashes of normalized filenames from Wikipedia MediaWiki:Bad_image_list
+export default '${hashes.join(' ')}'
+`
+  fs.writeFileSync(output, out)
 })

@@ -1,8 +1,5 @@
 import hashes from './mapping.js'
-import hash from './hash.js'
-
-// the list uses spaces, but wtf_wikipedia returns file names with underscores
-const normalize = (str) => str.toLowerCase().replace(/_/g, ' ').trim()
+import hash, { normalize } from './hash.js'
 
 const bad = new Set(hashes.split(' '))
 

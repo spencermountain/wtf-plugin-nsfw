@@ -1,3 +1,6 @@
+// the list uses spaces, but wtf_wikipedia returns file names with underscores
+export const normalize = (str) => str.toLowerCase().replace(/_/g, ' ').trim()
+
 // small synchronous hash for browser support and compact storage
 const hash = (str) => {
   let value = 0
