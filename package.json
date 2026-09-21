@@ -24,12 +24,8 @@
     }
   },
   "sideEffects": false,
-  "author": "Spencer Kelly (spencermountain)",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/spencermountain/wtf-plugin-nsfw.git"
-  },
-  "homepage": "https://github.com/spencermountain/wtf-plugin-nsfw#readme",
+  "author": "Spencer Kelly <spencermountain@gmail.com> (https://spencermountain.dev)",
+  "repository": "github:spencermountain/wtf-plugin-nsfw",
   "scripts": {
     "watch": "node --watch ./scratch.js",
     "test": "tape \"./tests/**/*.test.js\" | tap-dancer",
