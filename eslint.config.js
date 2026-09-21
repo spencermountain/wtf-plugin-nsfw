@@ -1,40 +1,41 @@
-import * as regexpPlugin from 'eslint-plugin-regexp'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import regexpPlugin from 'eslint-plugin-regexp'
 
-export default [
+export default defineConfig([
+  globalIgnores(['**/builds/**', 'scratch.js', 'rollup.config.js']),
   regexpPlugin.configs['flat/recommended'],
   {
-    ignores: ['**/builds/*', 'scratch.js', 'rollup.config.js'],
     rules: {
-      'regexp/no-misleading-capturing-group': 0, //todo remove this
-      'regexp/no-super-linear-backtracking': 0, //todo remove this, too
-      'comma-dangle': [1, 'only-multiline'],
-      quotes: [0, 'single', 'avoid-escape'],
-      'max-nested-callbacks': [1, 4],
-      'max-params': [1, 5],
-      'consistent-return': 1,
-      'no-bitwise': 1,
-      'no-empty': 1,
-      'no-console': 1,
-      'no-duplicate-imports': 1,
-      'no-eval': 2,
-      'no-implied-eval': 2,
-      'no-mixed-operators': 2,
-      'no-multi-assign': 2,
-      'no-nested-ternary': 1,
-      'no-prototype-builtins': 0,
-      'no-self-compare': 1,
-      'no-sequences': 1,
-      'no-shadow': 2,
-      'no-unmodified-loop-condition': 1,
-      'no-use-before-define': 1,
-      'prefer-const': 1,
-      radix: 1,
-      'no-unused-vars': 1,
-      'regexp/prefer-d': 0,
-      'regexp/prefer-w': 0,
-      'regexp/prefer-range': 0,
-      'regexp/no-unused-capturing-group': 0,
-      'regexp/optimal-quantifier-concatenation': 0
+      'regexp/no-misleading-capturing-group': 'off', //todo remove this
+      'regexp/no-super-linear-backtracking': 'off', //todo remove this, too
+      'comma-dangle': ['warn', 'only-multiline'],
+      quotes: ['off', 'single', 'avoid-escape'],
+      'max-nested-callbacks': ['warn', 4],
+      'max-params': ['warn', 5],
+      'consistent-return': 'warn',
+      'no-bitwise': 'warn',
+      'no-empty': 'warn',
+      'no-console': 'warn',
+      'no-duplicate-imports': 'warn',
+      'no-eval': 'error',
+      'no-implied-eval': 'error',
+      'no-multi-assign': 'error',
+      'no-nested-ternary': 'warn',
+      'no-prototype-builtins': 'off',
+      'no-self-compare': 'warn',
+      'no-sequences': 'warn',
+      'no-shadow': 'error',
+      'no-unmodified-loop-condition': 'warn',
+      'no-use-before-define': 'warn',
+      'prefer-const': 'warn',
+      radix: 'warn',
+      'no-mixed-operators': 'off',
+      'no-unused-vars': 'warn',
+      'regexp/prefer-d': 'off',
+      'regexp/prefer-w': 'off',
+      'regexp/prefer-range': 'off',
+      'regexp/no-unused-capturing-group': 'off',
+      'regexp/optimal-quantifier-concatenation': 'off'
     }
   }
-]
+])
