@@ -6,7 +6,7 @@
   "main": "./builds/wtf-plugin-nsfw.cjs",
   "module": "./builds/wtf-plugin-nsfw.mjs",
   "unpkg": "./builds/wtf-plugin-nsfw.min.js",
-  "types": "./types/index.d.ts",
+  "types": "./types/index.d.cts",
   "exports": {
     ".": {
       "import": {
