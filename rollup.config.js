@@ -1,6 +1,6 @@
 import terser from '@rollup/plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import fs from 'fs'
+import fs from 'node:fs'
 
 const pkg = JSON.parse(fs.readFileSync('./package.json').toString())
 const version = pkg.version

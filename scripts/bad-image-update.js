@@ -1,5 +1,5 @@
 import wtf from 'wtf_wikipedia'
-import fs from 'fs'
+import fs from 'node:fs'
 import hash, { normalize } from '../src/byImage/hash.js'
 
 const url = 'https://en.wikipedia.org/wiki/MediaWiki:Bad_image_list'
