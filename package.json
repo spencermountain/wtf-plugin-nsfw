@@ -1,12 +1,11 @@
 {
   "name": "wtf-plugin-nsfw",
-  "description": "content filter for wikipedia articles",
   "version": "1.0.1",
+  "description": "content filter for wikipedia articles",
+  "license": "MIT",
+  "repository": "github:spencermountain/wtf-plugin-nsfw",
+  "author": "Spencer Kelly <spencermountain@gmail.com> (https://spencermountain.dev)",
   "type": "module",
-  "main": "./builds/wtf-plugin-nsfw.cjs",
-  "module": "./builds/wtf-plugin-nsfw.mjs",
-  "unpkg": "./builds/wtf-plugin-nsfw.min.js",
-  "types": "./types/index.d.cts",
   "exports": {
     ".": {
       "import": {
@@ -23,9 +22,10 @@
       }
     }
   },
+  "main": "./builds/wtf-plugin-nsfw.cjs",
+  "module": "./builds/wtf-plugin-nsfw.mjs",
+  "types": "./types/index.d.cts",
   "sideEffects": false,
-  "author": "Spencer Kelly <spencermountain@gmail.com> (https://spencermountain.dev)",
-  "repository": "github:spencermountain/wtf-plugin-nsfw",
   "scripts": {
     "watch": "node --watch ./scratch.js",
     "test": "tape \"./tests/**/*.test.js\" | tap-dancer",
@@ -38,15 +38,8 @@
     "builds",
     "types"
   ],
-  "prettier": {
-    "trailingComma": "none",
-    "tabWidth": 2,
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 100
-  },
-  "peerDependencies": {
-    "wtf_wikipedia": "^10.0.0"
+  "dependencies": {
+    "eslint": "^10.11.0"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^16.0.3",
@@ -57,8 +50,15 @@
     "tape": "^5.10.2",
     "typescript": "^7.0.2"
   },
-  "license": "MIT",
-  "dependencies": {
-    "eslint": "^10.11.0"
+  "peerDependencies": {
+    "wtf_wikipedia": "^10.0.0"
+  },
+  "unpkg": "./builds/wtf-plugin-nsfw.min.js",
+  "prettier": {
+    "trailingComma": "none",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 100
   }
 }
