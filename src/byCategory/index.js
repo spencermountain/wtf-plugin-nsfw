@@ -22,13 +22,13 @@ const byCategory = function (doc) {
     }
     // try our 1-to-1 mapping
     if (mapping.hasOwnProperty(cat)) {
-      found.push({ reason: mapping[cat], cat: cat })
+      found.push({ reason: mapping[cat], name: cat })
       continue
     }
     // loop through our patterns
     const match = byPattern(cat, patterns)
     if (match) {
-      found.push({ reason: match, cat: cat })
+      found.push({ reason: match, name: cat })
     }
   }
   return found

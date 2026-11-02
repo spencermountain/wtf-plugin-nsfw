@@ -2,12 +2,12 @@
   <img src="https://cloud.githubusercontent.com/assets/399657/23590290/ede73772-01aa-11e7-8915-181ef21027bc.png" />
 
   <div>a plugin for <a href="https://github.com/spencermountain/wtf_wikipedia/">wtf_wikipedia</a></div>
-  
+
   <!-- npm version -->
   <a href="https://npmjs.org/package/wtf-plugin-nsfw">
     <img src="https://img.shields.io/npm/v/wtf-plugin-nsfw.svg?style=flat-square" />
   </a>
-  
+
   <!-- file size -->
   <a href="https://unpkg.com/wtf-plugin-nsfw/builds/wtf-plugin-nsfw.min.js">
     <img src="https://img.shields.io/bundlephobia/min/wtf-plugin-nsfw?style=flat-square" />
@@ -37,6 +37,7 @@ It looks in a number of different places:
 As of `v1.0`, this library flags **~2%** of english wikipedia articles.
 
 ### Usage
+
 ```js
 import wtf from 'wtf_wikipedia'
 import nsfwPlugin from 'wtf-plugin-nsfw'
@@ -44,40 +45,38 @@ wtf.extend(nsfwPlugin)
 
 let doc = await wtf.fetch('Toronto Raptors')
 doc.nsfw()
-// {
-//   safe_for_work: true,
-//   reason: null,
-//   detail: { title: [], image: [], template: [], category: [] }
-// }
+// []     ← an empty array means nothing was flagged
 
 doc = await wtf.fetch('One-night stand')
 doc.nsfw()
-// {
-//   safe_for_work: false,
-//   reason: 'Sexuality',
-//   detail: {
-//     title: [],
-//     image: [],
-//     template: [{ reason: 'Sexuality', name: 'human sexuality' }],
-//     category: [{ reason: 'Sexuality', cat: 'casual sex' }]
+// [
+//   {
+//     type: 'sexuality',
+//     evidence: [
+//       { source: 'template', name: 'human sexuality', data: { template: 'Human sexuality', ... } },
+//       { source: 'category', name: 'casual sex' }
+//     ]
 //   }
-// }
+// ]
 ```
 
-The `reason` property may be one of **Sexuality | Drug-use | Weapons | Violence | Profanity**
+Each warning's `type` may be one of **sexuality | drug-use | weapons | violence | profanity | obscenity** —
+warnings are sorted most-evidence-first, and each `evidence` row says which `template`, `category`, `title` or `image` triggered it, with the full parsed `data` of matched templates and images, so you can decide which warning types to allow, or blur a single image instead of rejecting the page.
 
 ---
 
 ### Install
+
 The package ships as an ES module, with a CommonJS build for `require()`:
 
 ```js
-const wtf = require('wtf_wikipedia')
-const nsfwPlugin = require('wtf-plugin-nsfw')
+import wtf from 'wtf_wikipedia'
+import nsfwPlugin from 'wtf-plugin-nsfw'
 wtf.extend(nsfwPlugin)
 ```
 
 natively on the web:
+
 ```html
 <script src="https://unpkg.com/wtf_wikipedia"></script>
 <script src="https://unpkg.com/wtf-plugin-nsfw"></script>
@@ -89,19 +88,16 @@ natively on the web:
 ```
 
 In TypeScript:
+
 ```ts
 import wtf from 'wtf_wikipedia'
-import nsfwPlugin, { NsfwDocument, NsfwReason } from 'wtf-plugin-nsfw'
+import nsfwPlugin, { NsfwDocument, NsfwType } from 'wtf-plugin-nsfw'
 wtf.extend(nsfwPlugin)
 
 const doc = wtf(text) as NsfwDocument
-const res = doc.nsfw()
-if (!res.safe_for_work) {
-  const why: NsfwReason = res.reason
-}
+const blocked: NsfwType[] = ['sexuality', 'obscenity']
+const allow = !doc.nsfw().some((w) => blocked.includes(w.type))
 ```
-
-
 
 ### Notes:
 

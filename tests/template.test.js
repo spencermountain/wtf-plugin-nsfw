@@ -4,20 +4,23 @@ import wtf from './_lib.js'
 const tmpl = (name) => wtf(`{{${name}}}\nSome text.`).nsfw()
 
 test('template detection', function (t) {
-  t.equal(tmpl('Human sexuality').reason, 'Sexuality', 'exact mapping')
-  t.equal(tmpl('Masturbation').reason, 'Sexuality', 'exact mapping, case-insensitive')
-  t.equal(tmpl('Stimulants').reason, 'Drug-use', 'exact mapping')
-  t.equal(tmpl('Terrorism').reason, 'Violence', 'pattern match')
-  t.equal(tmpl('Sex positions').reason, 'Sexuality', 'sex pattern')
+  t.equal(tmpl('Human sexuality')[0].type, 'sexuality', 'exact mapping')
+  t.equal(tmpl('Masturbation')[0].type, 'sexuality', 'exact mapping, case-insensitive')
+  t.equal(tmpl('Stimulants')[0].type, 'drug-use', 'exact mapping')
+  t.equal(tmpl('Terrorism')[0].type, 'violence', 'pattern match')
+  t.equal(tmpl('Sex positions')[0].type, 'sexuality', 'sex pattern')
 
-  const res = tmpl('Human sexuality')
-  t.deepEqual(res.detail.template, [{ reason: 'Sexuality', name: 'human sexuality' }], 'detail shape')
+  const evidence = tmpl('Human sexuality')[0].evidence
+  t.equal(evidence.length, 1, 'one piece of evidence')
+  t.equal(evidence[0].source, 'template', 'source')
+  t.equal(evidence[0].name, 'human sexuality', 'normalised name')
+  t.equal(evidence[0].data.template, 'Human sexuality', 'full template json attached')
   t.end()
 })
 
 test('template negatives', function (t) {
-  t.equal(tmpl('Infobox person|name=Foo').safe_for_work, true, 'infobox')
-  t.equal(tmpl('Citation needed').safe_for_work, true, 'unrelated template')
-  t.equal(tmpl('Sussex').safe_for_work, true, 'no word-boundary sex match')
+  t.deepEqual(tmpl('Infobox person|name=Foo'), [], 'infobox')
+  t.deepEqual(tmpl('Citation needed'), [], 'unrelated template')
+  t.deepEqual(tmpl('Sussex'), [], 'no word-boundary sex match')
   t.end()
 })

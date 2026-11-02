@@ -8,16 +8,17 @@ const byTemplate = function (doc) {
   for (let i = 0; i < templates.length; i++) {
     const tmpl = templates[i]
     // wtf_wikipedia v10 returns Template objects; v8 returned plain json
-    let title = typeof tmpl.json === 'function' ? tmpl.json().template : tmpl.template
-    title = (title || '').trim().toLowerCase()
+    const data = typeof tmpl.json === 'function' ? tmpl.json() : tmpl
+    const title = (data.template || '').trim().toLowerCase()
+    // try our 1-to-1 mapping, then the regex-list
+    let type = null
     if (mapping.hasOwnProperty(title)) {
-      found.push({ reason: mapping[title], name: title })
+      type = mapping[title]
     } else {
-      // try regex-list on it
-      const type = byPattern(title, patterns)
-      if (type) {
-        found.push({ reason: type, name: title })
-      }
+      type = byPattern(title, patterns)
+    }
+    if (type) {
+      found.push({ reason: type, name: title, data: data })
     }
   }
   return found

@@ -13,3 +13,20 @@ wtf.extend(plugin)
 
 let res = wtf(`{{Human sexuality}}\nSome text.`).nsfw()
 console.log(res)
+
+// let doc = await wtf.fetch('Toronto Raptors')
+// const warnings = doc.nsfw()
+// ;[
+//   {
+//     content: 'weapons',
+//     justification: {
+//       templates: [{ name: 'beretta firearms', data: {...} }]
+//     }
+//   },
+//   {
+//     content: 'sexuality',
+//     justification: {
+//       templates: [{ name: 'human sexuality', data: {...} }]
+//     }
+//   }
+// ]

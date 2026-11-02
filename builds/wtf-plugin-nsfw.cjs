@@ -388,15 +388,17 @@
     for (let i = 0; i < templates.length; i++) {
       const tmpl = templates[i];
       // wtf_wikipedia v10 returns Template objects; v8 returned plain json
-      const title = typeof tmpl.json === 'function' ? tmpl.json().template : tmpl.template;
+      const data = typeof tmpl.json === 'function' ? tmpl.json() : tmpl;
+      const title = (data.template || '').trim().toLowerCase();
+      // try our 1-to-1 mapping, then the regex-list
+      let type = null;
       if (mapping$2.hasOwnProperty(title)) {
-        found.push({ reason: mapping$2[title], name: title });
+        type = mapping$2[title];
       } else {
-        // try regex-list on it
-        const type = byPattern(title, patterns$2);
-        if (type) {
-          found.push({ reason: type, name: title });
-        }
+        type = byPattern(title, patterns$2);
+      }
+      if (type) {
+        found.push({ reason: type, name: title, data: data });
       }
     }
     return found
@@ -728,13 +730,13 @@
       }
       // try our 1-to-1 mapping
       if (mapping$1.hasOwnProperty(cat)) {
-        found.push({ reason: mapping$1[cat], cat: cat });
+        found.push({ reason: mapping$1[cat], name: cat });
         continue
       }
       // loop through our patterns
       const match = byPattern(cat, patterns$1);
       if (match) {
-        found.push({ reason: match, cat: cat });
+        found.push({ reason: match, name: cat });
       }
     }
     return found
@@ -757,7 +759,7 @@
   const paren = /\((.*)\)$/;
 
   const byTitle = function (doc) {
-    const title = doc.title();
+    const title = doc.title;
     if (!title) {
       return []
     }
@@ -773,13 +775,13 @@
 
     //look at known parentheses
     if (mapping.hasOwnProperty(inside)) {
-      return [{ reason: mapping[inside], title: inside }]
+      return [{ reason: mapping[inside], name: inside }]
     }
 
     // look at regex
     const match = byPattern(title, patterns);
     if (match) {
-      return [{ reason: match, title: title }]
+      return [{ reason: match, name: title }]
     }
     return []
   };
@@ -808,47 +810,50 @@
     const images = doc.images();
     const found = [];
     for (let i = 0; i < images.length; i++) {
-      let file = images[i].file();
+      const img = images[i];
+      let file = img.file();
       file = normalize(file.replace(/^[^:]*:/, ''));
       if (bad.has(hash(file))) {
-        found.push({ reason: 'Obscenity', name: file });
+        found.push({ reason: 'Obscenity', name: file, data: img.json() });
       }
     }
     return found
   };
 
+  // each detector returns rows like {reason:'Sexuality', name:'brothels', data:{..}}
+  const detectors = [
+    ['title', byTitle],
+    ['image', byImage],
+    ['template', byTemplate],
+    ['category', byCategory]
+  ];
+
   const plugin = function (models) {
     // add a new method to main class
-    models.Doc.prototype.nsfw = function (options) {
+    models.Doc.prototype.nsfw = function () {
       const doc = this;
-      const detail = {};
-
-      //look for 'john doe (pimp)', etc
-      detail.title = byTitle(doc);
-      // look for known obscene images
-      detail.image = byImage(doc);
-      //look for '{{terrorism}}'
-      detail.template = byTemplate(doc);
-      //look for 'Category: Porn websites', etc
-      detail.category = byCategory(doc);
-
-      const keys = Object.keys(detail);
-      for (let i = 0; i < keys.length; i++) {
-        if (detail[keys[i]].length > 0) {
-          const reason = detail[keys[i]].find((o) => o.reason) || {};
-          return {
-            safe_for_work: false,
-            reason: reason.reason,
-            detail: detail
+      // group every match by its content-warning type
+      const byType = {};
+      detectors.forEach((arr) => {
+        const source = arr[0];
+        const rows = arr[1](doc);
+        rows.forEach((row) => {
+          const type = row.reason.toLowerCase();
+          const found = { source: source, name: row.name };
+          if (row.data !== undefined) {
+            found.data = row.data;
           }
-        }
-      }
-      //otherwise, it's safe...?
-      return {
-        safe_for_work: true,
-        reason: null,
-        detail: detail
-      }
+          byType[type] = byType[type] || [];
+          byType[type].push(found);
+        });
+      });
+      // empty array means nothing was found
+      const warnings = Object.keys(byType).map((type) => {
+        return { type: type, evidence: byType[type] }
+      });
+      // most evidence first
+      warnings.sort((a, b) => b.evidence.length - a.evidence.length);
+      return warnings
     };
   };
   plugin.version = version;

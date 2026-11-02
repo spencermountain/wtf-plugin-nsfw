@@ -8,7 +8,7 @@ test('positive test', function (t) {
   const arr = ['one-night-stand', 'fashionistas', 'rocco-siffredi']
   arr.forEach((str) => {
     const doc = wtf(read(str))
-    t.equal(doc.nsfw().safe_for_work, false, str)
+    t.ok(doc.nsfw().length > 0, str)
   })
   t.end()
 })

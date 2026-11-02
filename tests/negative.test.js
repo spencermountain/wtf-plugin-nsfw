@@ -22,7 +22,7 @@ test('negative test', function (t) {
   ]
   arr.forEach((str) => {
     const doc = wtf(read(str))
-    t.equal(doc.nsfw().safe_for_work, true, str)
+    t.equal(doc.nsfw().length, 0, str)
   })
   t.end()
 })

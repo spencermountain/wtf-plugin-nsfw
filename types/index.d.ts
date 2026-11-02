@@ -1,45 +1,34 @@
 import type wtf from 'wtf_wikipedia'
 
-/** the broad category an article was flagged under */
-export type NsfwReason =
-  'Sexuality' | 'Drug-use' | 'Weapons' | 'Violence' | 'Profanity' | 'Obscenity'
+/** the broad category a piece of content was flagged under */
+export type NsfwType =
+  'sexuality' | 'drug-use' | 'weapons' | 'violence' | 'profanity' | 'obscenity'
 
-/** a page-title match, like 'Star Wars (adult film)' */
-export interface NsfwTitleMatch {
-  reason: NsfwReason
-  title: string
-}
-/** an image from wikipedia's bad-image list */
-export interface NsfwImageMatch {
-  reason: NsfwReason
+/** where a piece of evidence was found */
+export type NsfwSource = 'title' | 'image' | 'template' | 'category'
+
+/** one matched template, category, page-title or image */
+export interface NsfwEvidence {
+  source: NsfwSource
+  /** the matched name, like 'human sexuality' */
   name: string
-}
-/** a template match, like {{sex positions}} */
-export interface NsfwTemplateMatch {
-  reason: NsfwReason
-  name: string
-}
-/** a category match, like [[Category:Brothels]] */
-export interface NsfwCategoryMatch {
-  reason: NsfwReason
-  cat: string
+  /** the full parsed json of the matched template or image */
+  data?: object
 }
 
-export interface NsfwDetail {
-  title: NsfwTitleMatch[]
-  image: NsfwImageMatch[]
-  template: NsfwTemplateMatch[]
-  category: NsfwCategoryMatch[]
+/** one content-warning, with everything that triggered it */
+export interface NsfwWarning {
+  type: NsfwType
+  evidence: NsfwEvidence[]
 }
-
-export type NsfwResult =
-  | { safe_for_work: true; reason: null; detail: NsfwDetail }
-  | { safe_for_work: false; reason: NsfwReason; detail: NsfwDetail }
 
 /** the method this plugin adds to every Document */
 export interface NsfwMethods {
-  /** flag objectionable or adult content, from categories, templates, titles and images */
-  nsfw(options?: object): NsfwResult
+  /**
+   * list content-warnings found in categories, templates, titles and images.
+   * an empty array means nothing was flagged. sorted most-evidence-first.
+   */
+  nsfw(): NsfwWarning[]
 }
 
 /**

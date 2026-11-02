@@ -20,13 +20,13 @@ const byTitle = function (doc) {
 
   //look at known parentheses
   if (mapping.hasOwnProperty(inside)) {
-    return [{ reason: mapping[inside], title: inside }]
+    return [{ reason: mapping[inside], name: inside }]
   }
 
   // look at regex
   const match = byPattern(title, patterns)
   if (match) {
-    return [{ reason: match, title: title }]
+    return [{ reason: match, name: title }]
   }
   return []
 }

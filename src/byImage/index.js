@@ -9,10 +9,11 @@ const byImage = function (doc) {
   const images = doc.images()
   const found = []
   for (let i = 0; i < images.length; i++) {
-    let file = images[i].file()
+    const img = images[i]
+    let file = img.file()
     file = normalize(file.replace(/^[^:]*:/, ''))
     if (bad.has(hash(file))) {
-      found.push({ reason: 'Obscenity', name: file })
+      found.push({ reason: 'Obscenity', name: file, data: img.json() })
     }
   }
   return found
