@@ -1,3 +1,4 @@
+import version from './_version.js'
 import byTemplate from './byTemplate/index.js'
 import byCategory from './byCategory/index.js'
 import byTitle from './byTitle/index.js'
@@ -37,4 +38,5 @@ const plugin = function (models) {
     }
   }
 }
+plugin.version = version
 export default plugin

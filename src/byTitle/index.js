@@ -4,7 +4,7 @@ import byPattern from '../_byPattern.js'
 const paren = /\((.*)\)$/
 
 const byTitle = function (doc) {
-  const title = doc.title()
+  const title = doc.title
   if (!title) {
     return []
   }

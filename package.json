@@ -28,10 +28,10 @@
   "sideEffects": false,
   "scripts": {
     "watch": "node --watch ./scratch.js",
-    "test": "tape \"./tests/**/*.test.js\" | tap-dancer",
-    "testb": "TESTENV=prod tape \"./tests/**/*.test.js\" | tap-dancer",
-    "test:types": "tsc -p tests/types",
-    "build": "rollup -c",
+    "build": "node ./scripts/version.js && rollup -c",
+    "test": "tape --strict \"tests/**/*.test.js\" | tap-dancer",
+    "testb": "TESTENV=prod tape --strict \"tests/**/*.test.js\" | tap-dancer",
+    "version": "node ./scripts/version.js",
     "lint": "eslint ."
   },
   "files": [
@@ -39,26 +39,13 @@
     "types"
   ],
   "dependencies": {
-    "eslint": "^10.11.0"
+    "spacetime": "7.12.1"
   },
   "devDependencies": {
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-terser": "^1.0.0",
-    "eslint-plugin-regexp": "3.3.1",
-    "rollup": "4.63.4",
-    "tap-dancer": "^0.4.0",
-    "tape": "^5.10.2",
-    "typescript": "^7.0.2"
+    "wtf_wikipedia": "workspace:*"
   },
   "peerDependencies": {
-    "wtf_wikipedia": "^10.0.0"
+    "wtf_wikipedia": ">=9.0.0"
   },
-  "unpkg": "./builds/wtf-plugin-nsfw.min.js",
-  "prettier": {
-    "trailingComma": "none",
-    "tabWidth": 2,
-    "semi": false,
-    "singleQuote": true,
-    "printWidth": 100
-  }
+  "unpkg": "./builds/wtf-plugin-nsfw.min.js"
 }

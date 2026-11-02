@@ -1,12 +1,13 @@
+import { readFileSync } from 'node:fs'
 import terser from '@rollup/plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import fs from 'node:fs'
+import commonjs from '@rollup/plugin-commonjs'
+import sizeCheck from 'rollup-plugin-filesize-check'
 
-const pkg = JSON.parse(fs.readFileSync('./package.json').toString())
-const version = pkg.version
-console.log('\n 📦  - running rollup..\n')  
-
-const banner = '/* spencermountain/wtf-plugin-nsfw ' + version + ' MIT */'
+const { name, version } = JSON.parse(
+  readFileSync(new URL('./package.json', import.meta.url), 'utf8')
+)
+const banner = `/*! ${name} ${version} MIT */`
 
 export default [
   {
@@ -37,6 +38,6 @@ export default [
         name: 'wtfNsfw'
       }
     ],
-    plugins: [nodeResolve(), terser()]
+    plugins: [nodeResolve(), terser(), sizeCheck({ expect: 28, warn: 15 })]
   }
 ]
